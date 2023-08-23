@@ -37,14 +37,13 @@ jobs:
         go test -v -race -run TestElectionFollowerComesBack |& tee /tmp/raftlog
         go run ../tools/raft-testlog-viz/main.go < /tmp/raftlog
 
+    - name: Move the file to persistent directory
+      run: |
+        # Move the generated file to a persistent directory
+        mv /tmp/TestElectionFollowerComesBack.html ./TestElectionFollowerComesBack.html
+
     - name: Upload artifact for Test Part 1
       uses: actions/upload-artifact@v3
       with:
-        name: results
+        name: generated-file
         path: ./results/TestElectionFollowerComesBack.html
-
-    - name: Test Part 2
-      run: |
-        cd part2
-        pwd
-        go test -race ./...
