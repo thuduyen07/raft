@@ -64,7 +64,8 @@ func TestElectionLeaderAndAnotherDisconnect(t *testing.T) {
 }
 
 /*
-	Kiểm tra khi tất cả các node bị ngắt kết nối rồi kết nối lại để đảm bảo rằng có thể chọn leader sau khi kết nối lại tất cả các node.
+	Kiểm tra khi tất cả các node bị ngắt kết nối rồi kết nối lại 
+	để đảm bảo rằng có thể chọn leader sau khi kết nối lại tất cả các node.
 */
 func TestDisconnectAllThenRestore(t *testing.T) {
 	h := NewHarness(t, 3)
@@ -86,7 +87,9 @@ func TestDisconnectAllThenRestore(t *testing.T) {
 }
 
 /*
-	Kiểm tra khi người lãnh đạo bị ngắt kết nối rồi kết nối lại. Đảm bảo rằng người lãnh đạo được chọn lại và term không thay đổi.
+	Kiểm tra khi leader bị ngắt kết nối rồi kết nối lại 
+	để đảm bảo rằng leader được chọn lại và term không thay đổi 
+	trong trường hợp có tổng cộng 3 nodes
 */
 func TestElectionLeaderDisconnectThenReconnect(t *testing.T) {
 	h := NewHarness(t, 3)
@@ -111,6 +114,11 @@ func TestElectionLeaderDisconnectThenReconnect(t *testing.T) {
 	}
 }
 
+/*
+	Kiểm tra khi người lãnh đạo bị ngắt kết nối rồi kết nối lại
+	để đảm bảo rằng người lãnh đạo được chọn lại và term không thay đổi 
+	trong trường hợp có tổng cộng 5 nodes
+*/
 func TestElectionLeaderDisconnectThenReconnect5(t *testing.T) {
 	defer leaktest.CheckTimeout(t, 100*time.Millisecond)()
 
@@ -136,6 +144,10 @@ func TestElectionLeaderDisconnectThenReconnect5(t *testing.T) {
 	}
 }
 
+/*
+	Kiểm tra tình huống khi một follower bị ngắt kết nối rồi kết nối lại
+	để dảm bảo rằng term đã thay đổi, ngụ ý rằng quá trình bầu cử đã diễn ra.
+*/
 func TestElectionFollowerComesBack(t *testing.T) {
 	defer leaktest.CheckTimeout(t, 100*time.Millisecond)()
 
@@ -159,6 +171,10 @@ func TestElectionFollowerComesBack(t *testing.T) {
 	}
 }
 
+/*
+	Kiểm tra vòng lặp ngắt kết nối và kết nối lại 
+	để đảm bảo rằng các người lãnh đạo thay đổi và term tăng theo thời gian.
+*/
 func TestElectionDisconnectLoop(t *testing.T) {
 	defer leaktest.CheckTimeout(t, 100*time.Millisecond)()
 
