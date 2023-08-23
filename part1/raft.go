@@ -342,7 +342,7 @@ func (cm *ConsensusModule) startLeader() {
 	cm.dlog("becomes Leader; term=%d, log=%v", cm.currentTerm, cm.log)
 
 	go func() {
-		ticker := time.NewTicker(50 * time.Millisecond)
+		ticker := time.NewTicker(3000 * time.Millisecond)
 		defer ticker.Stop()
 
 		// Send periodic heartbeats, as long as still leader.
