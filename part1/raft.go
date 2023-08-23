@@ -209,6 +209,10 @@ func (cm *ConsensusModule) AppendEntries(args AppendEntriesArgs, reply *AppendEn
 	return nil
 }
 
+/*
+	Phương thức của đối tượng ConsensusModule dùng để triển khai bộ đếm thời gian 
+	cho việc bắt đầu một cuộc bầu cử mới. Ở đây đang đặt là 300ms
+*/
 // electionTimeout generates a pseudo-random election timeout duration.
 func (cm *ConsensusModule) electionTimeout() time.Duration {
 	// If RAFT_FORCE_MORE_REELECTION is set, stress-test by deliberately
@@ -221,6 +225,10 @@ func (cm *ConsensusModule) electionTimeout() time.Duration {
 	}
 }
 
+/*
+	Hàm này tạo ra một election timer để đếm ngược đến thời gian bầu cử 
+	và chuyển trạng thái của CM thành Candidate nếu cần.
+*/
 // runElectionTimer implements an election timer. It should be launched whenever
 // we want to start a timer towards becoming a candidate in a new election.
 //
@@ -234,6 +242,10 @@ func (cm *ConsensusModule) runElectionTimer() {
 	cm.mu.Unlock()
 	cm.dlog("election timer started (%v), term=%d", timeoutDuration, termStarted)
 
+	/*
+		Một ticker (chỉ thị bộ đếm thời gian) với khoảng thời gian là 100ms. 
+		Ticker này sẽ liên tục gửi một tín hiệu sau mỗi khoảng thời gian 100ms.
+	*/
 	// This loops until either:
 	// - we discover the election timer is no longer needed, or
 	// - the election timer expires and this CM becomes a candidate
