@@ -15,11 +15,19 @@ import (
 
 const DebugCM = 1
 
+/*
+	cấu trúc log gồm:
+	- một mục Command (lệnh được gửi) 
+	- Term (nhiệm kỳ hiện hành)
+*/
 type LogEntry struct {
 	Command interface{}
 	Term    int
 }
 
+/*
+	Trạng thái của một Consensus Module
+*/
 type CMState int
 
 const (
