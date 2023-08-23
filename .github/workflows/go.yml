@@ -40,7 +40,7 @@ jobs:
     - name: Upload artifact for Test Part 1
       uses: actions/upload-artifact@v3
       with:
-        name: test-results
+        name: results
         path: ./results/TestElectionFollowerComesBack.html
 
     - name: Test Part 2
