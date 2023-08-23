@@ -37,6 +37,12 @@ jobs:
         go test -v -race -run TestElectionFollowerComesBack |& tee /tmp/raftlog
         go run ../tools/raft-testlog-viz/main.go < /tmp/raftlog
 
+    - name: Upload artifact for Test Part 1
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-results
+        path: ./results/TestElectionFollowerComesBack.html
+
     - name: Test Part 2
       run: |
         cd part2
