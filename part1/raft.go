@@ -239,7 +239,7 @@ func (cm *ConsensusModule) runElectionTimer() {
 	// - the election timer expires and this CM becomes a candidate
 	// In a follower, this typically keeps running in the background for the
 	// duration of the CM's lifetime.
-	ticker := time.NewTicker(10 * time.Millisecond)
+	ticker := time.NewTicker(100 * time.Millisecond)
 	defer ticker.Stop()
 	for {
 		<-ticker.C
