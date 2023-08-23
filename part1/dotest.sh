@@ -1,7 +1,7 @@
 #!/bin/bash
 set -ex
 
-logfile=./rlog
+logfile=~/rlog
 
 go test -v -race -run $@ |& tee ${logfile}
 

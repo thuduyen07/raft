@@ -9,6 +9,9 @@ import (
 	"github.com/fortytw2/leaktest"
 )
 
+/*
+	Kiểm tra quá trình bầu cử đơn giản bằng cách tạo một harness với 3 nodes, kiểm tra xem có một leader duy nhất được chọn.
+*/
 func TestElectionBasic(t *testing.T) {
 	h := NewHarness(t, 3)
 	defer h.Shutdown()
@@ -16,6 +19,9 @@ func TestElectionBasic(t *testing.T) {
 	h.CheckSingleLeader()
 }
 
+/*
+	Kiểm tra khi leader bị ngắt kết nối, leader mới có được chọn và nhiệm kỳ term có tăng lên không.
+*/
 func TestElectionLeaderDisconnect(t *testing.T) {
 	h := NewHarness(t, 3)
 	defer h.Shutdown()
@@ -34,6 +40,10 @@ func TestElectionLeaderDisconnect(t *testing.T) {
 	}
 }
 
+/*
+	Kiểm tra khi cả leader và một node khác bị ngắt kết nối để đảm bảo không có leader được chọn khi không đủ thành viên để tiến hành bầu cử hoặc quyết định (No quorum), 
+	và kiểm tra sau khi kết nối lại một node, leader mới có được chọn hay không.
+*/
 func TestElectionLeaderAndAnotherDisconnect(t *testing.T) {
 	h := NewHarness(t, 3)
 	defer h.Shutdown()
@@ -53,6 +63,9 @@ func TestElectionLeaderAndAnotherDisconnect(t *testing.T) {
 	h.CheckSingleLeader()
 }
 
+/*
+	Kiểm tra khi tất cả các node bị ngắt kết nối rồi kết nối lại để đảm bảo rằng có thể chọn leader sau khi kết nối lại tất cả các node.
+*/
 func TestDisconnectAllThenRestore(t *testing.T) {
 	h := NewHarness(t, 3)
 	defer h.Shutdown()
@@ -72,6 +85,9 @@ func TestDisconnectAllThenRestore(t *testing.T) {
 	h.CheckSingleLeader()
 }
 
+/*
+	Kiểm tra khi người lãnh đạo bị ngắt kết nối rồi kết nối lại. Đảm bảo rằng người lãnh đạo được chọn lại và term không thay đổi.
+*/
 func TestElectionLeaderDisconnectThenReconnect(t *testing.T) {
 	h := NewHarness(t, 3)
 	defer h.Shutdown()
