@@ -40,6 +40,8 @@ jobs:
     - name: Move the file to persistent directory
       run: |
         # Move the generated file to a persistent directory
+        cd part1
+        pwd
         mv /tmp/TestElectionFollowerComesBack.html ./TestElectionFollowerComesBack.html
 
     - name: Upload artifact for Test Part 1
