@@ -215,9 +215,9 @@ func (cm *ConsensusModule) electionTimeout() time.Duration {
 	// generating a hard-coded number very often. This will create collisions
 	// between different servers and force more re-elections.
 	if len(os.Getenv("RAFT_FORCE_MORE_REELECTION")) > 0 && rand.Intn(3) == 0 {
-		return time.Duration(50) * time.Millisecond
+		return time.Duration(5) * time.Millisecond
 	} else {
-		return time.Duration(50+rand.Intn(50)) * time.Millisecond
+		return time.Duration(5+rand.Intn(5)) * time.Millisecond
 	}
 }
 
